@@ -15,13 +15,13 @@ export class RegisterResolver {
         return `${parent.firstName} ${parent.lastName}`;
     }
 
-    @Mutation(() => User, { description: 'Crea un usuario nuevo' })
+    @Mutation(() => User, { description: 'Crea un usuario nuevo' }) //Qué regresa
     async register(
         @Arg('firstName') firstName: string,
         @Arg('lastName') lastName: string,
         @Arg('email') email: string,
         @Arg('password') password: string,
-    ) : Promise<User> {
+    ) : Promise<User> { //Qué espera regresar
         const hashedPassword = await bcrypt.hash(password, 12);
 
         const user = await User.create({
