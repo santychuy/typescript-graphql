@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from 'typeorm';
-import { ObjectType, Field, ID } from 'type-graphql';
+import { ObjectType, Field, ID, Root } from 'type-graphql';
 
 /* Entendimiento hasta ahorita: 
     Entity es el modelo de datos que tendremos para nuestro schema y modelo de DB
@@ -24,7 +24,9 @@ export class User extends BaseEntity {
 
     /* Para solo Graphql */
     @Field()
-    name: string;
+    name(@Root() parent: User): string {
+        return `${parent.firstName} ${parent.lastName}`;
+    }
 
     /* Para ambos */
     @Field()
